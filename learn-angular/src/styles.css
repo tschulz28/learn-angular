@@ -2,3 +2,8 @@
 body {
   font-family: 'Be Vietnam Pro', sans-serif;
 }
+
+.hidden {
+  opacity: 0;
+  transition: opacity 0.75s ease;
+}

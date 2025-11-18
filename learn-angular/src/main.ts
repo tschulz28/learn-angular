@@ -7,6 +7,8 @@
  */
 
 import {bootstrapApplication} from '@angular/platform-browser';
+
+// Building the magic for Angular, importing important stuff
 import {appConfig} from './app/app.config';
 import {AppComponent} from './app/app.component';
 

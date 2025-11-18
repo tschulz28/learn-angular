@@ -6,6 +6,8 @@
  * - Control Flow in Components - @if
  * - Control Flow in Components - @for
  * - Property Binding in Angular
+ * - Event Handling
+ * - Component Input Properties (https://angular.dev/tutorials/learn-angular/8-input)
  * 
  * Connected from index.html:
  * index.html
@@ -24,6 +26,7 @@
  *        └── <app-footer>   → FooterComponent
  * 
  * Get this running:
+ * go to the source folder 'cd learn-angular'
  * execute 'ng serve' in terminal
  * open http://localhost:4200/ in browser
  * 
@@ -32,25 +35,10 @@
  * Reusability: Build small, focused components (e.g., UserCard, LoginForm).
  * Hierarchy instead of monolith: It is better to have many small components than one huge root component.
  */
-import {Component} from '@angular/core';
 
-/**
- * An example component of this application.
- * From 'Composing Components'
- * 
- * @selector 'app-user'
- * @description An example component used in the main component.
- */
-@Component({
-  selector: 'app-user',
-  /**
-   * The output of this component.
-   */ 
-  template: `Username: {{ username }}`,
-})
-export class User {
-  username = 'youngTech';
-}
+// Importing input due to "Component Input Properties"
+import {Component, input} from '@angular/core';
+import {User} from './user.component';
 
 /**
  * The main component of this application
@@ -77,8 +65,8 @@ export class User {
     <p [style.color]="isServerRunning ? 'darkgreen' : 'red'">@if (isServerRunning) {
       working with <section>
       @if (isLoggedIn) {
-        <!-- From 'Composing Components' -->
-        &quot;<app-user />&quot;
+        <!-- From 'Composing Components' and Component Input Properties -->
+        &quot;<app-user  name="Thomas S."/>&quot;
       }
       @else
       {
@@ -108,7 +96,17 @@ export class User {
 
     <p><i>Playing around to toggle a boolean member</i><br>
     Status: {{ isActive }} <= <button (click)="toggleActive()">Toggle</button></p>
-    <button (click)="toggleEditable()">Toggle Editable</button>`,
+    <button (click)="toggleEditable()">Toggle Editable</button>
+
+    <!-- From 'Event Handling' -->
+    <section
+     (mouseover)="showSecretMessage()"
+     (mouseleave)="hideSecretMessage()">
+      There's a secret message for you, hover to reveal 👀
+       <span [class.hidden]="!message">{{ message }}</span>
+    </section>
+    Some more text ...
+    `,
   imports: [User],
   styles: `
   :host {
@@ -175,6 +173,11 @@ export class AppComponent
   ];
 
   /**
+   * A string that represents a message.
+   */
+  message = '';
+
+  /**
    * Toggles the status of the boolean member 'isActive'.
    */
   toggleActive() {
@@ -205,5 +208,19 @@ export class AppComponent
    */
   toggleEditable() {
     this.isEditable = !this.isEditable;
+  }
+
+  /**
+   * From 'Event Handling'.
+   */
+  showSecretMessage() {
+    this.message = 'Way to go 🚀';
+  }
+
+  /**
+   * Enhancing 'Event Handling'
+   */
+  hideSecretMessage() {
+    this.message = '';
   }
 }
