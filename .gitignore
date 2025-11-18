@@ -1,3 +1,19 @@
+# Angular spezifisch
 /learn-angular/node_modules
+/learn-angular/dist
 /learn-angular/.angular
-.vscode/launch.json
+
+# IDE / Editor
+.vscode/
+
+# Build / Log-Files
+*.log
+*.zip
+*.tar.gz
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# git Files
+main
