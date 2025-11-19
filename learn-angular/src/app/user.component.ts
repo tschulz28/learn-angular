@@ -29,9 +29,11 @@ export class User {
   /**
    * From 'Component Input Properties'
    * 
-   * @remarks <p><code>name = input<string>();</code> creates an uninitialized property.</p>
-   * @remarks <p><code>name = input.required<string>();</code> creates an uninitialized property that need to be set.</p>
-   * @remarks <p><code>name = input<string>('Initial Name>();</code> creates an initialized property but cannot be overwritten.</p>
+   * @remarks <p>`name = input<string>();` creates an uninitialized property.</p>
+   * @remarks <p>`name = input.required<string>();` creates an uninitialized property that need to be set.</p>
+   * @remarks <p>`name = input<string>('Initial Name');` creates an initialized property - see following remarks!</p>
+   * @remarks <p>Setting the input property with `<'selector' name="value"/>` will **not** work on properties with initial values.</p>
+   * @remarks <p>Use the syntax `<'selector' [name]="'value'"/>` to set properties with initial values.</p>
    */
   name = input<string>();
 }

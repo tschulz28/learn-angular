@@ -65,8 +65,10 @@ import {User} from './user.component';
     <p [style.color]="isServerRunning ? 'darkgreen' : 'red'">@if (isServerRunning) {
       working with <section>
       @if (isLoggedIn) {
-        <!-- From 'Composing Components' and Component Input Properties -->
-        &quot;<app-user  name="Thomas S."/>&quot;
+        <!-- From 'Composing Components' and Component Input Properties
+          Setting the input property with <'selector' name="value"/> this will not work on properties with initial
+          values. Use the syntax <'selector' [name]="'value'"/> for those. -->
+        &quot;<app-user [username]="'TSZ'" name="Thomas S."/>&quot;
       }
       @else
       {
