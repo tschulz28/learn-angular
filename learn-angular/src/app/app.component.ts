@@ -7,7 +7,10 @@
  * - Control Flow in Components - @for
  * - Property Binding in Angular
  * - Event Handling
- * - Component Input Properties (https://angular.dev/tutorials/learn-angular/8-input)
+ * - Component Input Properties
+ *   API Element to control the child component on instantiation
+ * - Component Output Properties (https://angular.dev/tutorials/learn-angular/9-output)
+ *   API Element to emit events from the child component to the parent component, the child is a proxy.
  * 
  * Connected from index.html:
  * index.html
@@ -68,7 +71,10 @@ import {User} from './user.component';
         <!-- From 'Composing Components' and Component Input Properties
           Setting the input property with <'selector' name="value"/> this will not work on properties with initial
           values. Use the syntax <'selector' [name]="'value'"/> for those. -->
-        &quot;<app-user [username]="'TSZ'" name="Thomas S."/>&quot;
+        <!-- Listening to the output property addItemEvent with (addItemEvent)="addItem($event)"
+          addItemEvent is the syntax to handle the event.
+          addItem calls the event in this component und passes the emitting value. -->
+        &quot;<app-user [username]="'TSZ'" name="Thomas S." (addItemEvent)="addItem($event)"/>: {{items.length}} items ...&quot;
       }
       @else
       {
@@ -180,6 +186,12 @@ export class AppComponent
   message = '';
 
   /**
+   * An array of items added from the child component.
+   * From 'Component Output Properties'.
+   */
+  items = new Array();
+
+  /**
    * Toggles the status of the boolean member 'isActive'.
    */
   toggleActive() {
@@ -224,5 +236,14 @@ export class AppComponent
    */
   hideSecretMessage() {
     this.message = '';
+  }
+
+  /**
+   * From 'Component Output Properties'.
+   * 
+   * @param item The item emitted from the child component.
+   */
+  addItem(item: string) {
+    this.items.push(item);
   }
 }
