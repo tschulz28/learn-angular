@@ -9,8 +9,13 @@
  * - Event Handling
  * - Component Input Properties
  *   API Element to control the child component on instantiation
- * - Component Output Properties (https://angular.dev/tutorials/learn-angular/9-output)
+ * - Component Output Properties
  *   API Element to emit events from the child component to the parent component, the child is a proxy.
+ * - Deferrable Views (lazy loading)
+ * - Optimizing images
+ * - Routing Overview
+ * - Defining a Route
+ * - Use RouterLink for Navigation (https://angular.dev/tutorials/learn-angular/14-routerLink)
  * 
  * Connected from index.html:
  * index.html
@@ -18,6 +23,8 @@
  * └── <app-root>  → AppComponent (Root-Komponente)
  *        |
  *        ├── <app-header>   → HeaderComponent
+ *        |
+ *        ├── <app-logo>     → Logo Component
  *        |
  *        ├── <app-user>     → UserComponent
  *        |
@@ -39,9 +46,11 @@
  * Hierarchy instead of monolith: It is better to have many small components than one huge root component.
  */
 
-// Importing input due to "Component Input Properties"
+// Importing "input" due to "Component Input Properties"
 import {Component, input} from '@angular/core';
 import {User} from './user.component';
+import { LogoComponent } from './logo.component';
+import { RouterOutlet } from '@angular/router';
 
 /**
  * The main component of this application
@@ -86,6 +95,14 @@ import {User} from './user.component';
      No, the server is not running!
     }</p>
     </h2>
+
+    <!-- From Enabling Routing in Angular -->
+    <nav>
+      <a href="/">Home</a> |
+      <a href="/user">User</a>
+    </nav>
+    <router-outlet />
+
     <button (click)="toggleServer()">Toggle Server</button>
     <button (click)="toggleLogin()" [disabled]="!isServerRunning">Toggle Login</button>
      
@@ -114,8 +131,26 @@ import {User} from './user.component';
        <span [class.hidden]="!message">{{ message }}</span>
     </section>
     Some more text ...
-    `,
-  imports: [User],
+
+    <!-- From "Optimizing images" -->
+    <app-logo></app-logo>
+
+    <!-- From 'Deferrable Views (lazy loading)' -->
+    @defer (on viewport) {
+      <p><i>From 'Deferrable Views (lazy loading)'</i><br>
+      This paragraph is loaded after the main content.<br>
+      And it is loaded with a viewport trigger.</p>
+    } @placeholder {
+      <p>Loading deferred content...</p>
+    } @loading (minimum 2s) {
+      <p>Still loading...<br>
+        with a minimum duration of 2 seconds.</p>
+    } @error {
+      <p>Error loading deferred content!</p>
+    }
+
+    <p>Footer content goes here.</p>`,
+  imports: [User, LogoComponent, RouterOutlet],
   styles: `
   :host {
     color: #919191;

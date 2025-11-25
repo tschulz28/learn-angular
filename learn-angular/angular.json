@@ -50,7 +50,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/public"
+                "input": "src/public",
+                "output": "/public/"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets/"
               }
             ],
             "styles": ["src/styles.css"],
