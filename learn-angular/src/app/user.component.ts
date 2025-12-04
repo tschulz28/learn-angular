@@ -9,6 +9,9 @@
 // Importing output due to "Component Output Properties"
 import {Component, input, output} from '@angular/core';
 
+// Importing FormsModule due to Forms Overview
+import { FormsModule } from '@angular/forms';
+
 /**
  * An example component of this application.
  * From 'Composing Components'
@@ -24,7 +27,13 @@ import {Component, input, output} from '@angular/core';
   template: `Username: {{ username() }}<br>
   The user's name is {{name()}}<br>
   <!-- From 'Component Output Properties' -->
-  <button class="btn" (click)="addItem()">Add Item</button>`,
+  <button class="btn" (click)="addItem()">Add Item</button><br>
+  <!-- From 'Forms Overview'
+       NOTE: The syntax [()] is known as "banana in a box" but it represents
+       two-way binding: property binding and event binding.  -->
+  <!-- label for ="framework">Favorite Framework: <input type="text" id="framework"
+    [(ngModel)]="framework" /></label -->`,
+  imports: [FormsModule]
 })
 export class User {
 
@@ -50,6 +59,15 @@ export class User {
    * @remarks <p>Use the syntax `<'selector' [name]="'value'"/>` to set properties with initial values.</p>
    */
   name = input<string>();
+
+  /** 
+   * From 'Forms Overview'<br>
+   * Property bound to the input field with two-way binding:<br>
+   * `[(ngModel)]="framework"`
+   * 
+   * @remarks The syntax [()] is known as "banana in a box" but it represents two-way binding: property binding and event binding.
+   */
+  framework = ''; 
 
   /**
    * Represents an output property.<br>
